@@ -13841,7 +13841,7 @@ It is a ratio of true positives(words classified as spam, and which are actually
 <span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span>
 
 <span class="c1"># TODO: Calculate F-score using the formula above for beta = 0.5 and correct values for precision and recall.</span>
-<span class="n">fscore</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">beta</span><span class="o">*</span><span class="n">beta</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">precision</span><span class="o">*</span><span class="n">recall</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">beta</span><span class="o">*</span><span class="n">precision</span><span class="p">)</span><span class="o">+</span><span class="n">recall</span><span class="p">)</span>
+<span class="n">fscore</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">beta</span><span class="o">*</span><span class="n">beta</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">precision</span><span class="o">*</span><span class="n">recall</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">beta</span><span class="o">*</span><span class="n">beta</span><span class="o">*</span><span class="n">precision</span><span class="p">)</span><span class="o">+</span><span class="n">recall</span><span class="p">)</span>
 
 <span class="c1"># Print the results </span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total Records: </span><span class="si">{}</span><span class="s2">, TN: </span><span class="si">{}</span><span class="s2">, TP: </span><span class="si">{}</span><span class="s2">, FN: </span><span class="si">{}</span><span class="s2">, FP: </span><span class="si">{}</span><span class="s2">, Recall: </span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_records</span><span class="p">,</span> <span class="n">TN</span><span class="p">,</span> <span class="n">TP</span><span class="p">,</span><span class="n">FN</span><span class="p">,</span><span class="n">FP</span><span class="p">,</span> <span class="n">recall</span><span class="p">))</span>
@@ -13910,32 +13910,27 @@ Naive Predictor: [Accuracy score: 0.2478, F-score: 0.2756]
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ol>
-<li>Gaussian Naive Bayes</li>
+<li><p>Gaussian Naive Bayes
+Naive Bayes is a supervised learning that assumes that every feature of the data is independent. It classifies the data according to the probabilities of the features. One major application of this algorithm is spam detection. In finding whether a mail is spam or not, this algorithm calculates the apperance of words according to their appeance in the spam and nonspam emails in the training set. This ratio gives the probability of whether the email is spam or not.
+The strength of this algorithm is that it is simple, easy to understand and implement. It needs less training data. It makes predictions based of probabilities. This algorithm is also highly scalable. The complexity of the algorithm increases linearly as the number of predictions and data points increase. <a href="https://review.udacity.com/#!/reviews/1811853">https://review.udacity.com/#!/reviews/1811853</a>
+This algorithm makes a strong assumption that the features of the data is independent. Even though this makes the algorithm simple, it may sometimes lead to bad results. A new feature-label combination that didn't exist in the training set would lead to wrong posterior results while all combinations are multiplied.
+This algorithm could be a good candidate while our dataset is large and our problem is basically a categorization problem. <a href="https://scikit-learn.org/stable/modules/naive_bayes.html">https://scikit-learn.org/stable/modules/naive_bayes.html</a></p>
+</li>
+<li><p>Support Vector Machines
+SVM is a powerful classification algorithm that can classify data as well as define the maximum possible boundary between the classes.
+SVM is effective in high dimensional spaces. When there is a clear seperation between the classes, SVM can perform well.
+SVM is sensitive to overfitting when there are too many features of the data than the samples count. It is not easy to interprete the results of this algorithm since the classification is made by creating boundaries in multidimensional space. 
+<a href="https://review.udacity.com/#!/reviews/1811853">https://review.udacity.com/#!/reviews/1811853</a>
+Looking at the features of the data, there could be some clear seperation in identifying the income. So, it might be a good idea to give a try to SVM.
+<a href="https://scikit-learn.org/stable/modules/svm.html">https://scikit-learn.org/stable/modules/svm.html</a></p>
+</li>
+<li>Ensemble Methods (AdaBoost)
+AdaBoost algorithm can be used in face detection problem to find whether an image has a face or not. 
+In this algorithm, the model is trained over the same dataset repeatedly initially each data having the same weight. On each repetation, the misclassified data gets more weight. So that, the next learner gets more sensitive to the misclassified data. This provides better performance.
+This algorithm can be sensitive to overfitting especially where there is too much noise data. So, when using this algorithm, data preprocessing is very important.
+Our data seems to be large and clear enough. So we can try this method as well.
+<a href="https://scikit-learn.org/stable/modules/ensemble.html#adaboost">https://scikit-learn.org/stable/modules/ensemble.html#adaboost</a></li>
 </ol>
-<ul>
-<li>Naive Bayes is a supervised learning that assumes that every feature of the data is independent. It classifies the data according to the probabilities of the features. One major application of this algorithm is spam detection. In finding whether a mail is spam or not, this algorithm calculates the apperance of words according to their appeance in the spam and nonspam emails in the training set. This ratio gives the probability of whether the email is spam or not.</li>
-<li>The strength of this algorithm is that it is simple, easy to understand and implement. It needs less training data. It makes predictions based of probabilities.</li>
-<li>This algorithm makes a strong assumption that the features of the data is independent. Even though this makes the algorithm simple, it may sometimes lead to bad results. A new feature-label combination that didn't exist in the training set would lead to wrong posterior results while all combinations are multiplied.</li>
-<li>This algorithm could be a good candidate while our dataset is large and our problem is basically a categorization problem.</li>
-</ul>
-<ol>
-<li>Support Vector Machines</li>
-</ol>
-<ul>
-<li>SVM is a powerful classification algorithm that can classify data as well as define the maximum possible boundary between the classes.</li>
-<li>SVM is effective in high dimensional spaces. When there is a clear seperation between the classes, SVM can perform well.</li>
-<li>SVM is sensitive to overfitting when there are too many features of the data than the samples count.</li>
-<li>Looking at the features of the data, there could be some clear seperation in identifying the income. So, it might be a good idea to give a try to SVM.</li>
-</ul>
-<ol>
-<li>Ensemble Methods (AdaBoost)</li>
-</ol>
-<ul>
-<li>AdaBoost algorithm can be used in face detection problem to find whether an image has a face or not. </li>
-<li>In this algorithm, the model is trained over the same dataset repeatedly initially each data having the same weight. On each repetation, the misclassified data gets more weight. So that, the next learner gets more sensitive to the misclassified data. This provides better performance.</li>
-<li>This algorithm can be sensitive to overfitting especially where there is too much noise data. So, when using this algorithm, data preprocessing is very important.</li>
-<li>Our data seems to be large and clear enough. So we can try this method as well.</li>
-</ul>
 
 </div>
 </div>
@@ -14230,7 +14225,9 @@ While we have enough training data, learning on the same dataset as it gives mor
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Adaboost is a resemble method. In resemble methods, weak learners are created to form a one single strong learner. In Adaboost algorithm, a learner is created on the data, then on the same dataset extra weight is given to misclassified data so that in the next iteration, they are taken into account more. These iterations are repeated for the user specified number.</p>
+<p><strong>Answer: </strong> Adaboost is a classification algorithm. It used to predict whether a data is belongs to one class or another. At the same time, Adaboost is a resemble method. In resemble methods, models are created that can make predictions that will be used to create a single successful model later. 
+In Adaboost, an initial model is created using the training dataset. This model doesn't have to be very successful. It can make correct and wrong classifications but this is OK. Then a new model is created based on the first model and using the same training dataset. This time, in order to improve our first model, we give extra importance to the wrong predictions in the training dataset. So that, our second model can focus more on the first model's errors and tries to make better predictions on them. Then a third model is created in the same way. This continues for a specified number. Then, all these models are combined to make one and strong model. This is how Adaboost algorithm works. 
+<a href="https://machinelearningmastery.com/boosting-and-adaboost-for-machine-learning/">https://machinelearningmastery.com/boosting-and-adaboost-for-machine-learning/</a></p>
 
 </div>
 </div>
